@@ -1,24 +1,15 @@
 {
-  "name": "releases-monorepo",
-  "homepage": "https://github.com/trueberryless-org/releases",
-  "bugs": {
-    "url": "https://github.com/trueberryless-org/releases/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/trueberryless-org/releases.git"
-  },
-  "license": "MIT",
-  "author": "trueberryless <trueberryless@gmail.com> (https://trueberryless.org)",
+  "name": "recent-releases",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "version": "pnpm changeset version && pnpm i --no-frozen-lockfile"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "devDependencies": {
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.27.11",
-    "@trivago/prettier-plugin-sort-imports": "5.2.2",
-    "prettier": "3.5.3",
-    "prettier-plugin-astro": "0.14.1"
-  },
-  "packageManager": "pnpm@10.10.0"
+  "dependencies": {
+    "astro": "^5.16.3",
+    "octokit": "^5.0.5"
+  }
 }
