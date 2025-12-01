@@ -11,9 +11,6 @@ importers:
       astro:
         specifier: ^5.16.3
         version: 5.16.3(@types/node@24.10.1)(lightningcss@1.30.2)(rollup@4.53.3)(typescript@5.9.3)
-      lightningcss:
-        specifier: ^1.30.2
-        version: 1.30.2
       octokit:
         specifier: ^5.0.5
         version: 5.0.5
@@ -2489,7 +2486,8 @@ snapshots:
 
   destr@2.0.5: {}
 
-  detect-libc@2.1.2: {}
+  detect-libc@2.1.2:
+    optional: true
 
   deterministic-object-hash@2.0.2:
     dependencies:
@@ -2789,6 +2787,7 @@ snapshots:
       lightningcss-linux-x64-musl: 1.30.2
       lightningcss-win32-arm64-msvc: 1.30.2
       lightningcss-win32-x64-msvc: 1.30.2
+    optional: true
 
   longest-streak@3.1.0: {}
 
