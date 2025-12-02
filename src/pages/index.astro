@@ -5,387 +5,363 @@ import type { ReturnData } from "../types";
 
 // Fetch data at build time
 const data: ReturnData = await fetch(
-    `${import.meta.env.SITE || "http://localhost:4321"}/api/releases.json`,
+  `${import.meta.env.SITE || "http://localhost:4321"}/api/releases.json`
 )
-    .then((res) => res.json())
-    .catch(() => ({ infos: [], lastUpdated: 0, lastFetched: 0 }));
+  .then((res) => res.json())
+  .catch(() => ({ infos: [], lastUpdated: 0, lastFetched: 0 }));
 
 const config = {
-    name: import.meta.env.PUBLIC_NAME || "YourName",
-    login: import.meta.env.PUBLIC_LOGIN || "YourLogin",
+  name: import.meta.env.PUBLIC_NAME || "YourName",
+  login: import.meta.env.PUBLIC_LOGIN || "YourLogin",
 };
 
 const DEDUPE_RANGE = 2;
 
 const list = data.infos.filter((item, idx) => {
-    const previous = data.infos.slice(Math.max(0, idx - DEDUPE_RANGE), idx);
-    if (previous.some((p) => p.repo === item.repo)) return false;
-    return true;
+  const previous = data.infos.slice(Math.max(0, idx - DEDUPE_RANGE), idx);
+  if (previous.some((p) => p.repo === item.repo)) return false;
+  return true;
 });
 
 function formatTimeAgo(date: Date): string {
-    const now = new Date();
-    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-    if (diffInSeconds < 60) return "just now";
-    if (diffInSeconds < 3600)
-        return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-    if (diffInSeconds < 86400)
-        return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-    if (diffInSeconds < 2592000)
-        return `${Math.floor(diffInSeconds / 86400)} days ago`;
-    if (diffInSeconds < 31536000)
-        return `${Math.floor(diffInSeconds / 2592000)} months ago`;
-    return `${Math.floor(diffInSeconds / 31536000)} years ago`;
+  if (diffInSeconds < 60) return "just now";
+  if (diffInSeconds < 3600)
+    return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+  if (diffInSeconds < 86400)
+    return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+  if (diffInSeconds < 2592000)
+    return `${Math.floor(diffInSeconds / 86400)} days ago`;
+  if (diffInSeconds < 31536000)
+    return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+  return `${Math.floor(diffInSeconds / 31536000)} years ago`;
 }
 ---
 
 <Layout title={`${config.name} is Releasing...`}>
-    <div class="container">
-        <div class="header">
-            <h1>
-                <a
-                    href={`https://github.com/${config.name}`}
-                    target="_blank"
-                    class="profile-link"
-                >
-                    <img
-                        src={`https://github.com/${config.name}.png`}
-                        alt={config.name}
-                        class="avatar"
-                    />
-                </a>
-                <div class="title-wrapper">
-                    <div class="title">
-                        <a
-                            href={`https://github.com/${config.name}`}
-                            target="_blank"
-                        >
-                            {config.name}
-                        </a>
-                        <span> is </span>
-                        <span class="pulse">Releasing...</span>
-                    </div>
-                    <p class="subtitle">
-                        <a
-                            href={`https://github.com/${config.login}`}
-                            target="_blank"
-                        >
-                            <span class="username">@{config.login}</span>'s
-                            profile on GitHub
-                        </a>
-                    </p>
-                </div>
-            </h1>
-
-            <div class="actions">
-                <button
-                    id="dark-toggle"
-                    title="Toggle Dark Mode"
-                    class="action-btn"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 256 256"
-                        class="sun-icon"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M120 40V16a8 8 0 0 1 16 0v24a8 8 0 0 1-16 0m72 88a64 64 0 1 1-64-64a64.07 64.07 0 0 1 64 64m-16 0a48 48 0 1 0-48 48a48.05 48.05 0 0 0 48-48M58.34 69.66a8 8 0 0 0 11.32-11.32l-16-16a8 8 0 0 0-11.32 11.32Zm0 116.68l-16 16a8 8 0 0 0 11.32 11.32l16-16a8 8 0 0 0-11.32-11.32M192 72a8 8 0 0 0 5.66-2.34l16-16a8 8 0 0 0-11.32-11.32l-16 16A8 8 0 0 0 192 72m5.66 114.34a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32-11.32ZM48 128a8 8 0 0 0-8-8H16a8 8 0 0 0 0 16h24a8 8 0 0 0 8-8m80 80a8 8 0 0 0-8 8v24a8 8 0 0 0 16 0v-24a8 8 0 0 0-8-8m112-88h-24a8 8 0 0 0 0 16h24a8 8 0 0 0 0-16"
-                        ></path>
-                    </svg>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 256 256"
-                        class="moon-icon"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M240 96a8 8 0 0 1-8 8h-16v16a8 8 0 0 1-16 0v-16h-16a8 8 0 0 1 0-16h16V72a8 8 0 0 1 16 0v16h16a8 8 0 0 1 8 8m-96-40h8v8a8 8 0 0 0 16 0v-8h8a8 8 0 0 0 0-16h-8v-8a8 8 0 0 0-16 0v8h-8a8 8 0 0 0 0 16m72.77 97a8 8 0 0 1 1.43 8A96 96 0 1 1 95.07 37.8a8 8 0 0 1 10.6 9.06a88.07 88.07 0 0 0 103.47 103.47a8 8 0 0 1 7.63 2.67m-19.39 14.88c-1.79.09-3.59.14-5.38.14A104.11 104.11 0 0 1 88 64c0-1.79 0-3.59.14-5.38a80 80 0 1 0 109.24 109.24Z"
-                        ></path>
-                    </svg>
-                </button>
-                <a
-                    href="https://github.com/trueberryless-org/releases"
-                    target="_blank"
-                    title="GitHub Source Code"
-                    class="action-btn"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 256 256"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M208.31 75.68A59.78 59.78 0 0 0 202.93 28a8 8 0 0 0-6.93-4a59.75 59.75 0 0 0-48 24h-24a59.75 59.75 0 0 0-48-24a8 8 0 0 0-6.93 4a59.78 59.78 0 0 0-5.38 47.68A58.14 58.14 0 0 0 56 104v8a56.06 56.06 0 0 0 48.44 55.47A39.8 39.8 0 0 0 96 192v8H72a24 24 0 0 1-24-24a40 40 0 0 0-40-40a8 8 0 0 0 0 16a24 24 0 0 1 24 24a40 40 0 0 0 40 40h24v16a8 8 0 0 0 16 0v-40a24 24 0 0 1 48 0v40a8 8 0 0 0 16 0v-40a39.8 39.8 0 0 0-8.44-24.53A56.06 56.06 0 0 0 216 112v-8a58.14 58.14 0 0 0-7.69-28.32M200 112a40 40 0 0 1-40 40h-48a40 40 0 0 1-40-40v-8a41.74 41.74 0 0 1 6.9-22.48a8 8 0 0 0 1.1-7.69a43.81 43.81 0 0 1 .79-33.58a43.88 43.88 0 0 1 32.32 20.06a8 8 0 0 0 6.71 3.69h32.35a8 8 0 0 0 6.74-3.69a43.87 43.87 0 0 1 32.32-20.06a43.81 43.81 0 0 1 .77 33.58a8.09 8.09 0 0 0 1 7.65a41.72 41.72 0 0 1 7 22.52Z"
-                        ></path>
-                    </svg>
-                </a>
-                <a
-                    href="/feed.xml"
-                    target="_blank"
-                    title="RSS Feed"
-                    class="action-btn"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 256 256"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M98.91 157.09A71.53 71.53 0 0 1 120 208a8 8 0 0 1-16 0a56 56 0 0 0-56-56a8 8 0 0 1 0-16a71.53 71.53 0 0 1 50.91 21.09M48 88a8 8 0 0 0 0 16a104 104 0 0 1 104 104a8 8 0 0 0 16 0A120 120 0 0 0 48 88m118.79 1.21A166.89 166.89 0 0 0 48 40a8 8 0 0 0 0 16a151 151 0 0 1 151 151a8 8 0 0 0 16 0a166.9 166.9 0 0 0-48.21-117.79M52 192a12 12 0 1 0 12 12a12 12 0 0 0-12-12"
-                        ></path>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="divider">
-                <hr />
-            </div>
-        </div>
-
-        {
-            list.length > 0 ? (
-                <>
-                    {list.map((item, idx) => (
-                        <TheItem
-                            item={item}
-                            prev={list[idx - 1]}
-                            config={config}
-                        />
-                    ))}
-                </>
-            ) : (
-                <div class="no-releases">
-                    <p>No releases found yet...</p>
-                </div>
-            )
-        }
-
-        <div class="divider divider-top">
-            <hr />
-        </div>
-
-        <div class="footer">
-            {
-                data.lastUpdated > 0 && (
-                    <div class="footer-times">
-                        <span class="label">Last activity:</span>
-                        <time
-                            datetime={new Date(data.lastUpdated).toISOString()}
-                        >
-                            {formatTimeAgo(new Date(data.lastUpdated))}
-                        </time>
-                        <span class="separator">|</span>
-                        <span class="label">Last fetched:</span>
-                        <time
-                            datetime={new Date(data.lastFetched).toISOString()}
-                        >
-                            {formatTimeAgo(new Date(data.lastFetched))}
-                        </time>
-                    </div>
-                )
-            }
-            <p class="note">
-                GitHub API is not always realtime, it might take a couple hours
-                to update.
-            </p>
-        </div>
-
-        <div class="divider">
-            <hr />
-        </div>
-
-        <div class="footer-link">
-            <a href="https://github.com/antfu/releases.antfu.me">
-                Create your own page for latest releases
+  <div class="container">
+    <div class="header">
+      <h1>
+        <a
+          href={`https://github.com/${config.name}`}
+          target="_blank"
+          class="profile-link"
+        >
+          <img
+            src={`https://github.com/${config.name}.png`}
+            alt={config.name}
+            class="avatar"
+          />
+        </a>
+        <div class="title-wrapper">
+          <div class="title">
+            <a href={`https://github.com/${config.name}`} target="_blank">
+              {config.name}
             </a>
+            <span> is </span>
+            <span class="pulse">Releasing...</span>
+          </div>
+          <p class="subtitle">
+            <a href={`https://github.com/${config.login}`} target="_blank">
+              <span class="username">@{config.login}</span>'s profile on GitHub
+            </a>
+          </p>
         </div>
+      </h1>
+
+      <div class="actions">
+        <button id="dark-toggle" title="Toggle Dark Mode" class="action-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 256 256"
+            class="sun-icon"
+          >
+            <path
+              fill="currentColor"
+              d="M120 40V16a8 8 0 0 1 16 0v24a8 8 0 0 1-16 0m72 88a64 64 0 1 1-64-64a64.07 64.07 0 0 1 64 64m-16 0a48 48 0 1 0-48 48a48.05 48.05 0 0 0 48-48M58.34 69.66a8 8 0 0 0 11.32-11.32l-16-16a8 8 0 0 0-11.32 11.32Zm0 116.68l-16 16a8 8 0 0 0 11.32 11.32l16-16a8 8 0 0 0-11.32-11.32M192 72a8 8 0 0 0 5.66-2.34l16-16a8 8 0 0 0-11.32-11.32l-16 16A8 8 0 0 0 192 72m5.66 114.34a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32-11.32ZM48 128a8 8 0 0 0-8-8H16a8 8 0 0 0 0 16h24a8 8 0 0 0 8-8m80 80a8 8 0 0 0-8 8v24a8 8 0 0 0 16 0v-24a8 8 0 0 0-8-8m112-88h-24a8 8 0 0 0 0 16h24a8 8 0 0 0 0-16"
+            ></path>
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 256 256"
+            class="moon-icon"
+          >
+            <path
+              fill="currentColor"
+              d="M240 96a8 8 0 0 1-8 8h-16v16a8 8 0 0 1-16 0v-16h-16a8 8 0 0 1 0-16h16V72a8 8 0 0 1 16 0v16h16a8 8 0 0 1 8 8m-96-40h8v8a8 8 0 0 0 16 0v-8h8a8 8 0 0 0 0-16h-8v-8a8 8 0 0 0-16 0v8h-8a8 8 0 0 0 0 16m72.77 97a8 8 0 0 1 1.43 8A96 96 0 1 1 95.07 37.8a8 8 0 0 1 10.6 9.06a88.07 88.07 0 0 0 103.47 103.47a8 8 0 0 1 7.63 2.67m-19.39 14.88c-1.79.09-3.59.14-5.38.14A104.11 104.11 0 0 1 88 64c0-1.79 0-3.59.14-5.38a80 80 0 1 0 109.24 109.24Z"
+            ></path>
+          </svg>
+        </button>
+        <a
+          href="https://github.com/trueberryless-org/releases"
+          target="_blank"
+          title="GitHub Source Code"
+          class="action-btn"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 256 256"
+          >
+            <path
+              fill="currentColor"
+              d="M208.31 75.68A59.78 59.78 0 0 0 202.93 28a8 8 0 0 0-6.93-4a59.75 59.75 0 0 0-48 24h-24a59.75 59.75 0 0 0-48-24a8 8 0 0 0-6.93 4a59.78 59.78 0 0 0-5.38 47.68A58.14 58.14 0 0 0 56 104v8a56.06 56.06 0 0 0 48.44 55.47A39.8 39.8 0 0 0 96 192v8H72a24 24 0 0 1-24-24a40 40 0 0 0-40-40a8 8 0 0 0 0 16a24 24 0 0 1 24 24a40 40 0 0 0 40 40h24v16a8 8 0 0 0 16 0v-40a24 24 0 0 1 48 0v40a8 8 0 0 0 16 0v-40a39.8 39.8 0 0 0-8.44-24.53A56.06 56.06 0 0 0 216 112v-8a58.14 58.14 0 0 0-7.69-28.32M200 112a40 40 0 0 1-40 40h-48a40 40 0 0 1-40-40v-8a41.74 41.74 0 0 1 6.9-22.48a8 8 0 0 0 1.1-7.69a43.81 43.81 0 0 1 .79-33.58a43.88 43.88 0 0 1 32.32 20.06a8 8 0 0 0 6.71 3.69h32.35a8 8 0 0 0 6.74-3.69a43.87 43.87 0 0 1 32.32-20.06a43.81 43.81 0 0 1 .77 33.58a8.09 8.09 0 0 0 1 7.65a41.72 41.72 0 0 1 7 22.52Z"
+            ></path>
+          </svg>
+        </a>
+        <a href="/feed.xml" target="_blank" title="RSS Feed" class="action-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 256 256"
+          >
+            <path
+              fill="currentColor"
+              d="M98.91 157.09A71.53 71.53 0 0 1 120 208a8 8 0 0 1-16 0a56 56 0 0 0-56-56a8 8 0 0 1 0-16a71.53 71.53 0 0 1 50.91 21.09M48 88a8 8 0 0 0 0 16a104 104 0 0 1 104 104a8 8 0 0 0 16 0A120 120 0 0 0 48 88m118.79 1.21A166.89 166.89 0 0 0 48 40a8 8 0 0 0 0 16a151 151 0 0 1 151 151a8 8 0 0 0 16 0a166.9 166.9 0 0 0-48.21-117.79M52 192a12 12 0 1 0 12 12a12 12 0 0 0-12-12"
+            ></path>
+          </svg>
+        </a>
+      </div>
+
+      <div class="divider">
+        <hr />
+      </div>
     </div>
+
+    {
+      list.length > 0 ? (
+        <>
+          {list.map((item, idx) => (
+            <TheItem item={item} prev={list[idx - 1]} config={config} />
+          ))}
+        </>
+      ) : (
+        <div class="no-releases">
+          <p>No releases found yet...</p>
+        </div>
+      )
+    }
+
+    <div class="divider divider-top">
+      <hr />
+    </div>
+
+    <div class="footer">
+      {
+        data.lastUpdated > 0 && (
+          <div class="footer-times">
+            <span class="label">Last activity:</span>
+            <time datetime={new Date(data.lastUpdated).toISOString()}>
+              {formatTimeAgo(new Date(data.lastUpdated))}
+            </time>
+            <span class="separator">|</span>
+            <span class="label">Last fetched:</span>
+            <time datetime={new Date(data.lastFetched).toISOString()}>
+              {formatTimeAgo(new Date(data.lastFetched))}
+            </time>
+          </div>
+        )
+      }
+      <p class="note">
+        GitHub API is not always realtime, it might take a couple hours to
+        update.
+      </p>
+    </div>
+
+    <div class="divider">
+      <hr />
+    </div>
+
+    <div class="footer-link">
+      <a href="https://github.com/antfu/releases.antfu.me">
+        Create your own page for latest releases
+      </a>
+    </div>
+  </div>
 </Layout>
 
 <style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 45rem;
+    margin: 0 auto;
+    padding: 2.5rem;
+  }
+
+  @media (max-width: 640px) {
     .container {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        max-width: 45rem;
-        margin: 0 auto;
-        padding: 2.5rem;
+      padding: 1.5rem;
     }
+  }
 
-    @media (max-width: 640px) {
-        .container {
-            padding: 1.5rem;
-        }
-    }
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    .header {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+  h1 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-weight: 400;
+  }
 
-    h1 {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        font-weight: 400;
-    }
+  .profile-link {
+    display: block;
+  }
 
-    .profile-link {
-        display: block;
-    }
+  .avatar {
+    margin-right: 0.25rem;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
 
-    .avatar {
-        margin-right: 0.25rem;
-        height: 4.5rem;
-        width: 4.5rem;
-        border-radius: 50%;
-        box-shadow:
-            0 4px 6px -1px rgba(0, 0, 0, 0.1),
-            0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
+  .title-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
 
-    .title-wrapper {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-    }
+  .title {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
 
-    .title {
-        font-size: 1.875rem;
-        line-height: 1.2;
-    }
+  .pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
 
-    .pulse {
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
     }
+    50% {
+      opacity: 0.5;
+    }
+  }
 
-    @keyframes pulse {
-        0%,
-        100% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0.5;
-        }
-    }
+  .subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0.5;
+    margin: 0;
+    font-size: 1rem;
+  }
 
-    .subtitle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        opacity: 0.5;
-        margin: 0;
-        font-size: 1rem;
-    }
+  .username {
+    font-family:
+      ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+      "DejaVu Sans Mono", monospace;
+  }
 
-    .username {
-        font-family:
-            ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
-            "DejaVu Sans Mono", monospace;
-    }
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 1.125rem;
+  }
 
-    .actions {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        font-size: 1.125rem;
-    }
+  .action-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .action-btn {
-        background: none;
-        border: none;
-        color: inherit;
-        cursor: pointer;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  .action-btn svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 
-    .action-btn svg {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
+  .moon-icon {
+    display: none;
+  }
 
-    .moon-icon {
-        display: none;
-    }
+  html.dark .sun-icon {
+    display: none;
+  }
 
-    html.dark .sun-icon {
-        display: none;
-    }
+  html.dark .moon-icon {
+    display: block;
+  }
 
-    html.dark .moon-icon {
-        display: block;
-    }
+  .divider {
+    padding: 0.5rem 0;
+  }
 
-    .divider {
-        padding: 0.5rem 0;
-    }
+  .divider-top {
+    padding-top: 2rem;
+  }
 
-    .divider-top {
-        padding-top: 2rem;
-    }
+  .divider hr {
+    margin: 0 auto;
+    width: 5rem;
+    border: none;
+    border-top: 1px solid;
+    opacity: 0.25;
+  }
 
-    .divider hr {
-        margin: 0 auto;
-        width: 5rem;
-        border: none;
-        border-top: 1px solid;
-        opacity: 0.25;
-    }
+  .no-releases {
+    text-align: center;
+    opacity: 0.5;
+    padding: 2rem 0;
+  }
 
-    .no-releases {
-        text-align: center;
-        opacity: 0.5;
-        padding: 2rem 0;
-    }
+  .footer {
+    text-align: center;
+    opacity: 0.5;
+    font-size: 0.875rem;
+  }
 
-    .footer {
-        text-align: center;
-        opacity: 0.5;
-        font-size: 0.875rem;
-    }
+  .footer-times {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
 
-    .footer-times {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.25rem;
-        justify-content: center;
-        margin-bottom: 0.5rem;
-    }
+  .footer .label {
+    opacity: 0.75;
+  }
 
-    .footer .label {
-        opacity: 0.75;
-    }
+  .separator {
+    margin: 0 0.5rem;
+    opacity: 0.5;
+  }
 
-    .separator {
-        margin: 0 0.5rem;
-        opacity: 0.5;
-    }
+  .note {
+    margin: 0.5rem 0 0 0;
+  }
 
-    .note {
-        margin: 0.5rem 0 0 0;
-    }
-
-    .footer-link {
-        text-align: center;
-        opacity: 0.5;
-    }
+  .footer-link {
+    text-align: center;
+    opacity: 0.5;
+  }
 </style>

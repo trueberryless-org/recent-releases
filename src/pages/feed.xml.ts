@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+
 import type { ReturnData } from "../types";
 
 const logoOverrides: Record<string, string> = {
@@ -45,7 +46,7 @@ export const GET: APIRoute = async ({ site }) => {
         logoOverrides[item.repo] ||
         `https://github.com/${item.repo.split("/")[0]}.png`
       }" type="image/png" length="0"/>
-    </item>`,
+    </item>`
       )
       .join("")}
   </channel>

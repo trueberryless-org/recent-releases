@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { Octokit } from "octokit";
+
 import type { ReleaseInfo, ReturnData } from "../../types";
 
 const LIMIT = 300;
@@ -30,7 +31,7 @@ export const GET: APIRoute = async () => {
         headers: {
           "Content-Type": "application/json",
         },
-      },
+      }
     );
   }
 
@@ -53,7 +54,7 @@ export const GET: APIRoute = async () => {
       console.log(`✅ Received ${data.length} events on page ${page}`);
 
       const pushEvents = data.filter(
-        (item) => item.type === "PushEvent" && item.public,
+        (item) => item.type === "PushEvent" && item.public
       );
       console.log(`   Found ${pushEvents.length} push events`);
 
@@ -133,7 +134,7 @@ export const GET: APIRoute = async () => {
 
     // Remove duplicates by ID
     const uniqueInfos = Array.from(
-      new Map(infos.map((item) => [item.id, item])).values(),
+      new Map(infos.map((item) => [item.id, item])).values()
     );
 
     console.log(`📊 Total unique releases: ${uniqueInfos.length}`);
@@ -173,7 +174,7 @@ export const GET: APIRoute = async () => {
         headers: {
           "Content-Type": "application/json",
         },
-      },
+      }
     );
   }
 };
