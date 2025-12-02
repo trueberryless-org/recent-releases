@@ -15,13 +15,7 @@ const config = {
   login: import.meta.env.PUBLIC_LOGIN || "YourLogin",
 };
 
-const DEDUPE_RANGE = 2;
-
-const list = data.infos.filter((item, idx) => {
-  const previous = data.infos.slice(Math.max(0, idx - DEDUPE_RANGE), idx);
-  if (previous.some((p) => p.repo === item.repo)) return false;
-  return true;
-});
+const list = data.infos;
 
 function formatTimeAgo(date: Date): string {
   const now = new Date();
@@ -99,7 +93,7 @@ function formatTimeAgo(date: Date): string {
           </svg>
         </button>
         <a
-          href="https://github.com/trueberryless-org/releases"
+          href="https://github.com/trueberryless-org/recent-releases"
           target="_blank"
           title="GitHub Source Code"
           class="action-btn"
@@ -113,19 +107,6 @@ function formatTimeAgo(date: Date): string {
             <path
               fill="currentColor"
               d="M208.31 75.68A59.78 59.78 0 0 0 202.93 28a8 8 0 0 0-6.93-4a59.75 59.75 0 0 0-48 24h-24a59.75 59.75 0 0 0-48-24a8 8 0 0 0-6.93 4a59.78 59.78 0 0 0-5.38 47.68A58.14 58.14 0 0 0 56 104v8a56.06 56.06 0 0 0 48.44 55.47A39.8 39.8 0 0 0 96 192v8H72a24 24 0 0 1-24-24a40 40 0 0 0-40-40a8 8 0 0 0 0 16a24 24 0 0 1 24 24a40 40 0 0 0 40 40h24v16a8 8 0 0 0 16 0v-40a24 24 0 0 1 48 0v40a8 8 0 0 0 16 0v-40a39.8 39.8 0 0 0-8.44-24.53A56.06 56.06 0 0 0 216 112v-8a58.14 58.14 0 0 0-7.69-28.32M200 112a40 40 0 0 1-40 40h-48a40 40 0 0 1-40-40v-8a41.74 41.74 0 0 1 6.9-22.48a8 8 0 0 0 1.1-7.69a43.81 43.81 0 0 1 .79-33.58a43.88 43.88 0 0 1 32.32 20.06a8 8 0 0 0 6.71 3.69h32.35a8 8 0 0 0 6.74-3.69a43.87 43.87 0 0 1 32.32-20.06a43.81 43.81 0 0 1 .77 33.58a8.09 8.09 0 0 0 1 7.65a41.72 41.72 0 0 1 7 22.52Z"
-            ></path>
-          </svg>
-        </a>
-        <a href="/feed.xml" target="_blank" title="RSS Feed" class="action-btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 256 256"
-          >
-            <path
-              fill="currentColor"
-              d="M98.91 157.09A71.53 71.53 0 0 1 120 208a8 8 0 0 1-16 0a56 56 0 0 0-56-56a8 8 0 0 1 0-16a71.53 71.53 0 0 1 50.91 21.09M48 88a8 8 0 0 0 0 16a104 104 0 0 1 104 104a8 8 0 0 0 16 0A120 120 0 0 0 48 88m118.79 1.21A166.89 166.89 0 0 0 48 40a8 8 0 0 0 0 16a151 151 0 0 1 151 151a8 8 0 0 0 16 0a166.9 166.9 0 0 0-48.21-117.79M52 192a12 12 0 1 0 12 12a12 12 0 0 0-12-12"
             ></path>
           </svg>
         </a>
