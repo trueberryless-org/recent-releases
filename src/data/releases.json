@@ -1,0 +1,146 @@
+[
+  {
+    "title": "ci: release starlight-toc-overview-customizer v0.1.2 (#30)",
+    "sha": "35a0d704cc1c777fc8fa3d4f7e440f6613d4c763",
+    "commit": "https://github.com/trueberryless-org/starlight-toc-overview-customizer/commit/35a0d704cc1c777fc8fa3d4f7e440f6613d4c763",
+    "created_at": 1764524340000,
+    "version": "0.1.2",
+    "package": "starlight-toc-overview-customizer"
+  },
+  {
+    "title": "ci: release starlight-spell-checker v0.2.3 (#49)",
+    "sha": "736afb254d83fcb07008da2d4f810e3833c35e09",
+    "commit": "https://github.com/trueberryless-org/starlight-spell-checker/commit/736afb254d83fcb07008da2d4f810e3833c35e09",
+    "created_at": 1764524002000,
+    "version": "0.2.3",
+    "package": "starlight-spell-checker"
+  },
+  {
+    "title": "ci: release starlight-cooler-credit v0.5.0 (#103)",
+    "sha": "12733c9a093c425990ab2d900de992859af78397",
+    "commit": "https://github.com/trueberryless-org/starlight-cooler-credit/commit/12733c9a093c425990ab2d900de992859af78397",
+    "created_at": 1763921723000,
+    "version": "0.5.0",
+    "package": "starlight-cooler-credit"
+  },
+  {
+    "title": "ci: release template-files v0.10.6 (#223)",
+    "sha": "aba5cc561614faac9beb4081e90f70c9af2e4e57",
+    "commit": "https://github.com/trueberryless-org/template-files/commit/aba5cc561614faac9beb4081e90f70c9af2e4e57",
+    "created_at": 1762956355000,
+    "version": "0.10.6",
+    "package": "template-files"
+  },
+  {
+    "title": "ci: release release-image-generator v0.5.0 (#46)",
+    "sha": "f1e3b22f2da203a353711c4e9033ea0912555f6c",
+    "commit": "https://github.com/trueberryless-org/release-image-generator/commit/f1e3b22f2da203a353711c4e9033ea0912555f6c",
+    "created_at": 1762692386000,
+    "version": "0.5.0",
+    "package": "release-image-generator"
+  },
+  {
+    "title": "ci: release starlight-view-modes v0.11.1 (#123)",
+    "sha": "380db8705b144dc5ab491b3a661583d6ca68ac47",
+    "commit": "https://github.com/trueberryless-org/starlight-view-modes/commit/380db8705b144dc5ab491b3a661583d6ca68ac47",
+    "created_at": 1762079702000,
+    "version": "0.11.1",
+    "package": "starlight-view-modes"
+  },
+  {
+    "title": "ci: release starlight-toc-overview-customizer v0.1.1 (#25)",
+    "sha": "559c8efc90a11d4f2d83523af0dd1ddd999d1a8c",
+    "commit": "https://github.com/trueberryless-org/starlight-toc-overview-customizer/commit/559c8efc90a11d4f2d83523af0dd1ddd999d1a8c",
+    "created_at": 1762078721000,
+    "version": "0.1.1",
+    "package": "starlight-toc-overview-customizer"
+  },
+  {
+    "title": "ci: release starlight-theme-next v0.3.3 (#52)",
+    "sha": "39c6cd949434a4aaccafc31c044fd6af64cb396b",
+    "commit": "https://github.com/trueberryless-org/starlight-theme-next/commit/39c6cd949434a4aaccafc31c044fd6af64cb396b",
+    "created_at": 1762078692000,
+    "version": "0.3.3",
+    "package": "starlight-theme-next"
+  },
+  {
+    "title": "ci: release starlight-sidebar-topics-dropdown v0.5.2 (#69)",
+    "sha": "bec77e02397a9426723cf5be8f949b7f6bc30ab4",
+    "commit": "https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown/commit/bec77e02397a9426723cf5be8f949b7f6bc30ab4",
+    "created_at": 1762077871000,
+    "version": "0.5.2",
+    "package": "starlight-sidebar-topics-dropdown"
+  },
+  {
+    "title": "ci: release starlight-sidebar-swipe v0.1.1 (#29)",
+    "sha": "55d184b68e175de8edf2501cc3d7e821822fc6a2",
+    "commit": "https://github.com/trueberryless-org/starlight-sidebar-swipe/commit/55d184b68e175de8edf2501cc3d7e821822fc6a2",
+    "created_at": 1762077773000,
+    "version": "0.1.1",
+    "package": "starlight-sidebar-swipe"
+  },
+  {
+    "title": "ci: release starlight-save-file-component v0.1.1 (#19)",
+    "sha": "fd8f88f9664393c357801456e822c3539abfc9f7",
+    "commit": "https://github.com/trueberryless-org/starlight-save-file-component/commit/fd8f88f9664393c357801456e822c3539abfc9f7",
+    "created_at": 1762077722000,
+    "version": "0.1.1",
+    "package": "starlight-save-file-component"
+  },
+  {
+    "title": "ci: release @trueberryless-org/starlight-plugins-docs-components v0.4.3 (#39)",
+    "sha": "c9015091c08fa79ca5a0011037084bb51cef5d30",
+    "commit": "https://github.com/trueberryless-org/starlight-plugins-docs-components/commit/c9015091c08fa79ca5a0011037084bb51cef5d30",
+    "created_at": 1762075786000,
+    "version": "0.4.3",
+    "package": "@trueberryless-org/starlight-plugins-docs-components"
+  },
+  {
+    "title": "ci: release starlight-plugin-show-latest-version v0.5.1 (#53)",
+    "sha": "cfb37181ec593b5643cad5f0e28ff6dfb8e50c19",
+    "commit": "https://github.com/trueberryless-org/starlight-plugin-show-latest-version/commit/cfb37181ec593b5643cad5f0e28ff6dfb8e50c19",
+    "created_at": 1762075476000,
+    "version": "0.5.1",
+    "package": "starlight-plugin-show-latest-version"
+  },
+  {
+    "title": "ci: release starlight-cooler-credit v0.4.1 (#97)",
+    "sha": "1f0e0aba736a8ee265f251877aeb2b4262521bf9",
+    "commit": "https://github.com/trueberryless-org/starlight-cooler-credit/commit/1f0e0aba736a8ee265f251877aeb2b4262521bf9",
+    "created_at": 1762075167000,
+    "version": "0.4.1",
+    "package": "starlight-cooler-credit"
+  },
+  {
+    "title": "ci: release starlight-contributor-list v0.3.1 (#52)",
+    "sha": "ab39f249453f3623e9523f0a96266da807a0e24f",
+    "commit": "https://github.com/trueberryless-org/starlight-contributor-list/commit/ab39f249453f3623e9523f0a96266da807a0e24f",
+    "created_at": 1762075010000,
+    "version": "0.3.1",
+    "package": "starlight-contributor-list"
+  },
+  {
+    "title": "ci: release starlight-spell-checker v0.2.2 (#41)",
+    "sha": "896aef65ddc26120fb1041ac19968470f394bea7",
+    "commit": "https://github.com/trueberryless-org/starlight-spell-checker/commit/896aef65ddc26120fb1041ac19968470f394bea7",
+    "created_at": 1761947388000,
+    "version": "0.2.2",
+    "package": "starlight-spell-checker"
+  },
+  {
+    "title": "ci: release template-files v0.10.5 (#219)",
+    "sha": "3f8c5ecd90069af62f0fc40d7fdc2d8eba051b31",
+    "commit": "https://github.com/trueberryless-org/template-files/commit/3f8c5ecd90069af62f0fc40d7fdc2d8eba051b31",
+    "created_at": 1761946935000,
+    "version": "0.10.5",
+    "package": "template-files"
+  },
+  {
+    "title": "ci: release template-files v0.10.4 (#217)",
+    "sha": "e4e12c945bd1b36ff26ded534c76c21f5c561547",
+    "commit": "https://github.com/trueberryless-org/template-files/commit/e4e12c945bd1b36ff26ded534c76c21f5c561547",
+    "created_at": 1761946077000,
+    "version": "0.10.4",
+    "package": "template-files"
+  }
+]
