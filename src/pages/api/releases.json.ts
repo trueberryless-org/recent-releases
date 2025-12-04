@@ -2,7 +2,6 @@ import type { APIRoute } from "astro";
 import { Buffer } from "node:buffer";
 import { Octokit } from "octokit";
 
-// Definiere dein reduziertes Schema hier direkt oder importiere es
 type Release = {
   title: string;
   sha: string;
@@ -38,7 +37,6 @@ export const GET: APIRoute = async () => {
 
   const octokit = new Octokit({ auth: githubToken });
 
-  // 1. Helper: Live Events holen und ins Slim-Format wandeln
   async function fetchLiveReleases(): Promise<Release[]> {
     let gathered: Release[] = [];
     try {
@@ -65,7 +63,6 @@ export const GET: APIRoute = async () => {
                 const message = commit?.message || "";
                 const title = message.split("\n")[0];
 
-                // Regex Logik
                 const versionMatch = title.match(
                   /v?(\d+\.\d+\.\d+(?:-[\w.]+)?)/
                 );
@@ -76,7 +73,6 @@ export const GET: APIRoute = async () => {
                   title.match(/release\s+(@?[\w-]+)/);
                 const packageName = packageMatch ? packageMatch[1] : "";
 
-                // Rückgabe im reduzierten Schema
                 return {
                   title,
                   sha: commit?.sha || "",
@@ -103,7 +99,7 @@ export const GET: APIRoute = async () => {
   }
 
   try {
-    // 2. Bestehende "Datenbank" (JSON) vom Repo lesen
+    console.log();
     console.log("📂 Reading existing database...");
     let storedReleases: Release[] = [];
     let fileSha: string | undefined = undefined;
@@ -119,7 +115,6 @@ export const GET: APIRoute = async () => {
       );
 
       if (!Array.isArray(fileData) && fileData.content) {
-        // Base64 decodieren, um das JSON zu lesen
         const contentString = Buffer.from(fileData.content, "base64").toString(
           "utf-8"
         );
@@ -131,14 +126,11 @@ export const GET: APIRoute = async () => {
       console.log("⚠️ No database found, starting fresh.");
     }
 
-    // 3. Mergen: Live + Stored
     const liveReleases = await fetchLiveReleases();
     const allReleases = [...liveReleases, ...storedReleases];
 
-    // Deduplizieren basierend auf SHA
     const uniqueMap = new Map<string, Release>();
     allReleases.forEach((item) => {
-      // Wenn der SHA schon existiert, überschreiben wir ihn nicht (oder doch, egal da identisch)
       if (item.sha && !uniqueMap.has(item.sha)) {
         uniqueMap.set(item.sha, item);
       }
@@ -146,15 +138,11 @@ export const GET: APIRoute = async () => {
 
     const finalInfos = Array.from(uniqueMap.values());
 
-    // Sortieren: Neueste oben
     finalInfos.sort((a, b) => b.created_at - a.created_at);
 
-    // 4. Update schreiben (nur wenn neue Daten erkannt wurden)
-    // Wir vergleichen einfach die Länge. (Genauer wäre Vergleich der Top-SHA, aber Länge reicht meist)
     if (finalInfos.length > storedReleases.length) {
       console.log(`💾 Saving ${finalInfos.length} releases to GitHub...`);
 
-      // JSON -> String -> Base64 encodieren für den Transport
       const newContentBase64 = Buffer.from(
         JSON.stringify(finalInfos, null, 2)
       ).toString("base64");
@@ -165,7 +153,7 @@ export const GET: APIRoute = async () => {
         path: STORAGE_PATH,
         message: `chore: update releases database [${new Date().toISOString()}]`,
         content: newContentBase64,
-        sha: fileSha, // Nötig für das Update
+        sha: fileSha,
         committer: {
           name: "Release-Bot",
           email: "bot@trueberryless.org",
@@ -174,7 +162,6 @@ export const GET: APIRoute = async () => {
       console.log("✅ Database updated.");
     }
 
-    // Response ans Frontend (limitiert auf 300 für Performance)
     const responseInfos = finalInfos.slice(0, LIMIT);
 
     return new Response(
