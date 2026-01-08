@@ -24,10 +24,10 @@
     "octokit": "^5.0.5"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.7",
-    "@trivago/prettier-plugin-sort-imports": "5.2.2",
-    "prettier": "3.6.2",
+    "@changesets/changelog-github": "^0.5.2",
+    "@changesets/cli": "^2.29.8",
+    "@trivago/prettier-plugin-sort-imports": "6.0.2",
+    "prettier": "3.7.4",
     "prettier-plugin-astro": "0.14.1"
   },
   "packageManager": "pnpm@10.10.0"
