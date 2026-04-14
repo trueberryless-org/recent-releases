@@ -17,4 +17,4 @@ Please check out the [original version](https://github.com/antfu/releases.antfu.
 
 Licensed under the MIT license, Copyright © trueberryless.
 
-See [LICENSE](/LICENSE) for more information.
+See [LICENSE](https://github.com/trueberryless-org/recent-releases/blob/main/LICENSE) for more information.
