@@ -20,7 +20,7 @@
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile"
   },
   "dependencies": {
-    "astro": "^5.16.8",
+    "astro": "^5.18.2",
     "octokit": "^5.0.5"
   },
   "devDependencies": {
