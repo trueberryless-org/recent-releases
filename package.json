@@ -1,7 +1,7 @@
 {
   "name": "recent-releases",
   "version": "0.0.1",
-  "homepage": "https://recent-releases.trueberryless.org",
+  "homepage": "https://recent-releases.felixs.dev",
   "bugs": {
     "url": "https://github.com/trueberryless-org/recent-releases/issues"
   },
@@ -10,7 +10,7 @@
     "url": "https://github.com/trueberryless-org/recent-releases.git"
   },
   "license": "MIT",
-  "author": "trueberryless <trueberryless@gmail.com> (https://trueberryless.org)",
+  "author": "trueberryless <trueberryless@gmail.com> (https://felixs.dev)",
   "type": "module",
   "scripts": {
     "astro": "astro",
