@@ -20,12 +20,12 @@
     "version": "pnpm changeset version && pnpm i --no-frozen-lockfile"
   },
   "dependencies": {
-    "astro": "^5.18.2",
+    "astro": "^7.2.9",
     "octokit": "^5.0.5"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.7.0",
-    "@changesets/cli": "^2.31.1",
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.1",
     "@trivago/prettier-plugin-sort-imports": "6.0.2",
     "prettier": "3.9.6",
     "prettier-plugin-astro": "0.14.1"
