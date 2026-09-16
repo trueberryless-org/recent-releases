@@ -123,9 +123,9 @@ function formatTimeAgo(date: Date): string {
         target="_blank"
         class="version"
       >
-        <span>v</span>{mergedParts[0]}<span class={`highlight ${color}`}
-          >{mergedParts[1]}</span
-        >
+        <span>v</span>
+        {mergedParts[0]}
+        <span class={`highlight ${color}`}>{mergedParts[1]}</span>
       </a>
       <time datetime={new Date(item.created_at).toISOString()} class="time">
         {formatTimeAgo(new Date(item.created_at))}
