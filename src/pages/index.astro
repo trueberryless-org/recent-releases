@@ -117,40 +117,36 @@ function formatTimeAgo(date: Date): string {
       </div>
     </div>
 
-    {
-      list.length > 0 ? (
-        <>
-          {list.map((item, idx) => (
-            <TheItem item={item} prev={list[idx - 1]} config={config} />
-          ))}
-        </>
-      ) : (
-        <div class="no-releases">
-          <p>No releases found yet...</p>
-        </div>
-      )
-    }
+    {list.length > 0 ? (
+      <>
+        {list.map((item, idx) => (
+          <TheItem item={item} prev={list[idx - 1]} config={config} />
+        ))}
+      </>
+    ) : (
+      <div class="no-releases">
+        <p>No releases found yet...</p>
+      </div>
+    )}
 
     <div class="divider divider-top">
       <hr />
     </div>
 
     <div class="footer">
-      {
-        data.lastUpdated > 0 && (
-          <div class="footer-times">
-            <span class="label">Last activity:</span>
-            <time datetime={new Date(data.lastUpdated).toISOString()}>
-              {formatTimeAgo(new Date(data.lastUpdated))}
-            </time>
-            <span class="separator">|</span>
-            <span class="label">Last fetched:</span>
-            <time datetime={new Date(data.lastFetched).toISOString()}>
-              {formatTimeAgo(new Date(data.lastFetched))}
-            </time>
-          </div>
-        )
-      }
+      {data.lastUpdated > 0 && (
+        <div class="footer-times">
+          <span class="label">Last activity:</span>
+          <time datetime={new Date(data.lastUpdated).toISOString()}>
+            {formatTimeAgo(new Date(data.lastUpdated))}
+          </time>
+          <span class="separator">|</span>
+          <span class="label">Last fetched:</span>
+          <time datetime={new Date(data.lastFetched).toISOString()}>
+            {formatTimeAgo(new Date(data.lastFetched))}
+          </time>
+        </div>
+      )}
       <p class="note">
         GitHub API is not always realtime, it might take a couple hours to
         update.
